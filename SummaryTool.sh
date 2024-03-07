@@ -127,15 +127,15 @@ echo $echomode "Database Size: \t\t\t\t $(echo "$t100" | grep "Database Size" | 
 # Max pool size
 echo $echomode "Max Pool Size:  \t\t\t $(echo "$t100" | awk '/Maximum Pool Size/ {print $NF}')"
 # Max database connections
-echo $echomode "Maximum MySQL Connections: \t\t $(echo "$t100" | awk '/max_connections/ {print $NF}')"
+echo $echomode "Maximum MySQL Connections: \t\t $(echo "$t100" | awk '/Max Connections/ {print $NF}')"
 # Max allowed packet
-echo $echomode "Max Allowed Packet Size: \t\t $(($(echo "$t100" | awk '/max_allowed_packet/ {print $NF}')/ 1048576)) MB"
+echo $echomode "Max Allowed Packet Size: \t\t $(($(echo "$t100" | awk '/Max Allowed Packet Size/ {print $NF}')/ 1048576)) MB"
 # Binary logging
-binlogging=`echo "$t100" | awk '/log_bin ..................../ {print $NF}'`
+binlogging=`echo "$t100" | awk '/Binary Log/ {print $NF}'`
 if [ "$binlogging" = "OFF" ] ; then
-	echo $echomode "Bin Logging: \t\t\t\t $(echo "$t100" | awk '/log_bin ..................../ {print $NF}') \t$(tput setaf 2)✓$(tput sgr0)"
+	echo $echomode "Bin Logging: \t\t\t\t $(echo "$t100" | awk '/Binary Log/ {print $NF}') \t$(tput setaf 2)✓$(tput sgr0)"
 else
-	echo $echomode "Bin Logging: \t\t\t\t $(echo "$t100" | awk '/log_bin ..................../ {print $NF}') \t$(tput setaf 9)[!]$(tput sgr0)"
+	echo $echomode "Bin Logging: \t\t\t\t $(echo "$t100" | awk '/Binary Log/ {print $NF}') \t$(tput setaf 9)[!]$(tput sgr0)"
 fi
 # MyISAM tables
 echo $echomode "MyISAM Tables:  \t\t\t $(echo "$t100" | awk '/MyISAM Tables/ {print $NF}')"
